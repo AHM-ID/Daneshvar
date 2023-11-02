@@ -1,0 +1,136 @@
+﻿@using System.Security.Claims;
+<!DOCTYPE html>
+<html dir="rtl" lang="fa-IR">
+<head>
+    <title>دانشور | @ViewData["Title"]</title>
+    <partial name="_MetaTags" />
+    <partial name="_Styles" />
+</head>
+<body>
+    <script src="/js/modernizr-custom.js"></script>
+
+    <div class="flex-wrapper">
+        <!--Main Navigation-->
+        <header>
+            <!-- Jumbotron -->
+            <div class="p-3 text-center bg-white border-bottom">
+                <div class="container-fluid">
+                    <div class="row gy-3">
+                        <!-- Left elements -->
+                        <div class="col-lg-2 col-sm-12 col-12">
+                            <a href="https://www.linkedin.com/in/ahm-id/" target="_blank" class="justify-content-center text-decoration-none">
+                                <img src="/images/Local/Header-Logo.png" class="img-fluid" style="height: 50px;"/>
+                            </a>
+                        </div>
+                        <!-- Left elements -->
+                        <!-- Center elements -->
+                        <div class="order-lg-last col-lg-6 col-sm-12 col-12">
+                            <div class="d-flex float-end">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a asp-action="Index" asp-controller="Home" asp-area="UserPanel" class="me-1 py-1 px-3 nav-link d-flex align-items-center border-bottom border-primary"> <i class="bi bi-check2-circle icon-larger-1 m-1 me-md-2"></i><p class="d-none d-md-block mb-0">@User.FindFirstValue("FullName") خوش آمدید!</p></a>
+                                    <a asp-action="Logout" asp-controller="Account" class="me-1 py-1 px-3 nav-link d-flex align-items-center border-bottom border-warning order-last"> <i class="bi bi-slash-circle icon-larger-1 m-1 me-md-2 text-warning"></i><p class="d-none d-md-block mb-0 text-warning">خروج</p></a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Login" asp-controller="Account" class="me-1 py-1 px-3 nav-link d-flex align-items-center border-bottom border-primary"> <i class="bi bi-person-check icon-larger-1 m-1 me-md-2"></i><p class="d-none d-md-block mb-0">حساب کاربری</p></a>
+                                }
+                                <a asp-action="" class="me-1 py-1 px-3 nav-link d-flex align-items-center border-bottom border-danger"> <i class="bi bi-heart text-danger icon-larger-2 m-1 me-md-2"></i><p class="d-none d-md-block mb-0 text-danger">علاقمندی ها</p></a>
+                                <a asp-action="" class="py-1 px-3 nav-link d-flex align-items-center border-bottom border-success"> <i class="bi bi-cart4 text-success icon-larger-2 m-1 me-md-2"></i><p class="d-none d-md-block mb-0 text-success">سبد خرید</p></a>
+                            </div>
+                        </div>
+                        <!-- Center elements -->
+                        <!-- Right elements -->
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="input-group mb-3 md-form form-sm form-2 pl-0">
+                                <input type="text" class="form-control my-0 py-1 border-warning rounded-start" placeholder="دنبال چی میگردی ؟" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-warning" type="button">
+                                        <i class="bi bi-search text-grey"
+                                           aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right elements -->
+                    </div>
+                </div>
+            </div>
+            <!-- Jumbotron -->
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+                <!-- Container wrapper -->
+                <div class="container justify-content-center justify-content-md-between">
+                    <!-- Toggle button -->
+                    <button class="navbar-toggler border py-2 text-dark"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarLeftAlignExample"
+                            aria-controls="navbarLeftAlignExample"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <!-- Collapsible wrapper -->
+                    <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+                        <!-- Left links -->
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" aria-current="page" href="/">خانه</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">دسته بندی ها</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">پیشنهاد ویژه</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">هدایا</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">پروژه ها</a>
+                            </li>
+                            <!-- Navbar dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    دیگر موارد
+                                </a>
+                                <!-- Dropdown menu -->
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                    </li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- Left links -->
+                    </div>
+                </div>
+                <!-- Container wrapper -->
+            </nav>
+            <!-- Navbar -->
+            <!-- Jumbotron -->
+            @RenderSection("Banner", false)
+            <!-- Jumbotron -->
+        </header>
+        @RenderBody()
+
+        <!-- Footer -->
+        <partial name="_Footer" />
+        <!-- Footer -->
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script defer src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿@model OnlineShop.DataLayer.Entities.User.User;
+
+@{
+    ViewData["Title"] = "ثبت نام موفق";
+}
+
+<section class="w-100 border-dark mt-2">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black rounded">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-12">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a class="text-decoration-none text-success" asp-action="Index" asp-controller="Home">خانه</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">تکمیل ثبت نام</li>
+                                    </ol>
+                                </nav>
+                                <h1 class="text-center text-success fw-bold mb-3 mx-1 mx-md-4 mt-3">ثبت نام</h1>
+
+                                <div class="alert alert-success" role="alert">
+                                    <h4 class="alert-heading"><i class="bi bi-check2-circle icon-larger-1 me-2"></i>@Model.UserName عزیز !</h4>
+                                    <p>ثبت نام اولیه شما با موفقیت انجام شد. ایمیلی حاوی لینک فعال سازی به آدرس "@Model.Email" ارسال شده است.</p>
+                                    <hr>
+                                    <p class="mb-0">جهت تکمیل ثبت نام خود روی لینک ایمیل ارسال شده کلیک کنید.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

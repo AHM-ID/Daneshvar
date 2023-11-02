@@ -1,0 +1,127 @@
+﻿@model OnlineShop.Core.DTOs.Users.LoginViewModel
+
+@{
+    ViewData["Title"] = "ورود";
+}
+
+<section class="w-100 h-100 border-dark mt-2">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black rounded">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a class="text-decoration-none text-success" asp-action="Index" asp-controller="Home">خانه</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">ورود</li>
+                                    </ol>
+                                </nav>
+
+                                <h1 class="text-center text-secondary fw-bold mb-3 mx-1 mx-md-4 mt-3">ورود به حساب کاربری</h1>
+                                <form asp-action="Login" asp-controller="Account" method="post" class="mx-1 mx-md-4">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                    @if (ViewBag.Success != null)
+                                    {
+                                        <div class="d-grid flex-row align-items-center mb-3">
+                                            <div class="alert alert-success" role="alert">
+                                                <h4 class="alert-heading">
+                                                    <i class="bi bi-check2-circle icon-larger-1 me-2"></i> ورود موفق
+                                                </h4>
+                                                <p>ورود به سایت با موفقیت انجام شد.</p>
+                                                <hr>
+                                                <p class="mb-0">لطفا چند ثانیه صبر کنید.</p>
+                                                <p class="mb-0">شما به صورت خودکار به داشبورد خود هدایت می شوید.</p>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            var delay = 2000;
+                                            setTimeout(function () { window.location = "https://localhost:44359/UserPanel"; }, delay);
+                                        </script>
+                                    }
+
+                                    @if (Context.Request.Query["EditProfile"].ToString() == "true")
+                                    {
+                                        <div class="d-grid flex-row align-items-center mb-3">
+                                            <div class="alert alert-warning" role="alert">
+                                                <h4 class="alert-heading">
+                                                    <i class="bi bi-exclamation-circle icon-larger-1 me-2"></i> هشدار امنیتی
+                                                </h4>
+                                                <p>به دلیل ویرایش اطلاعات کاربری</p>
+                                                <hr>
+                                                <p class="mb-0">لطفا مجددا وارد سایت شوید.</p>
+                                                <p class="mb-0">با تشکر!! تیم دانشور</p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <div class="d-flex flex-row align-items-center mb-3">
+                                        <i class="bi bi-envelope icon-larger-1 me-3 align-self-end"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <input asp-for="Email" type="email" class="form-control" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-3">
+                                        <i class="bi bi-lock icon-larger-1 me-3 align-self-end"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Password" class="control-label"></label>
+                                            <input asp-for="Password" type="password" class="form-control" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group form-check d-flex justify-content-start">
+                                        <div>
+                                            <input asp-for="RememberMe" class="form-check-input" type="checkbox" id="formExample" />
+                                        </div>
+                                        <div>
+                                            <label asp-for="RememberMe" class="form-check-label" for="formExample"></label>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="form-group d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <input type="submit" value="ورود" class="btn btn-primary btn-lg" />
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="form-group d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <a class="btn btn-lg btn-block btn-outline-success"
+                                           asp-action="Register" asp-controller="Account">
+                                            <i class="bi bi-check2-circle icon-larger-2 me-2"></i> عضویت در سایت
+                                        </a>
+                                    </div>
+
+                                    <div class="form-group d-flex justify-content-start mx-4 mb-3 mb-lg-4">
+                                        <a class="text-decoration-none"
+                                           asp-action="ForgotPassword" asp-controller="Account">
+                                            <i class="bi bi-key icon-larger-2 me-2"></i> فراموشی رمز عبور
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex order-1 order-lg-2">
+                                <img src="~/images/Local/Login.png" class="img-fluid" alt="Login image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

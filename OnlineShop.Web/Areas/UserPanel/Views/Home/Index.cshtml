@@ -1,0 +1,217 @@
+﻿@using OnlineShop.Core.Convertors;
+@using System.Security.Claims;
+@model OnlineShop.Core.DTOs.Users.UserInformationViewModel
+
+@{
+    ViewData["Title"] = " پنل کاربری " + User.FindFirstValue("FullName");
+}
+
+<!-- content -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <partial name="_SideBar" />
+            <main class="col-lg-9 col-xl-9">
+                <div class="card p-4 mb-0 shadow-0 border shadow">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="text-decoration-none text-success" href="/">خانه</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">پروفایل</li>
+                        </ol>
+                    </nav>
+                    <div class="content-body">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <img src="/UserAvatar/@Model.UserAvatar" class="rounded-circle shadow border" style="height: 80px; width: 80px;" />
+                            </div>
+                            <div class="pt-2">
+                                <h5 class="pt-2 text-success">@Model.FullName</h5>
+                                <small class="pt-2 text-success">@Model.UserName</small>
+                                <p>
+                                    ایمیل : @Model.Email
+                                    <a asp-action="EditProfile" asp-controller="Home" class="px-2"><i class="bi bi-pen"></i></a>
+                                </p>
+                                <p>
+                                    تاریخ عضویت : @Model.RegisterDate.ToShamsi() ، موجودی کیف پول شما : @Model.Wallet تومان
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <div class="border p-3 rounded-3 bg-light">
+                                    <b class="mx-2 text-muted"><i class="bi bi-geo-alt"></i></b>
+                                    تهران، میدان رسالت، خیابان هفتم آذر، خیابان شهید دستاربندانی، پلاک 6 واحد 3
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border p-3 rounded-3 bg-light">
+                                    <b class="mx-2 text-muted"><i class="bi bi-geo-alt"></i></b>
+                                    تهران، خیابان نیروی دریایی، خیابان شهدای گل، پلاک 1 واحد 1
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn btn-outline-info rounded">افزودن آدرس جدید <i class="bi bi-plus-lg"></i></a>
+
+                        <hr class="my-4" />
+
+                        <h5 class="mb-3">سفارشات شما</h5>
+                        <div class="card border border-primary mb-4 shadow-0">
+                            <div class="card-body pb-0">
+                                <header class="d-lg-flex">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">
+                                            شماره فاکتور : 8924 <i class="dot"></i>
+                                            <span class="text-success"> پرداخت شده</span>
+                                        </h6>
+                                        <span class="text-muted">تاریخ : 16 اردیبهشت 1381</span>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="btn btn-sm btn-outline-primary">پیگیری سفارش</a>
+                                        <a href="#" class="btn btn-sm btn-outline-danger">لغو سفارش</a>
+                                    </div>
+                                </header>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="mb-0 text-muted">Contact</p>
+                                        <p class="m-0">
+                                            Mike Johnatan <br />
+                                            Phone: 371-295-9131 <br />
+                                            Email: info@mywebsite.com
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 border-start">
+                                        <p class="mb-0 text-muted">Shipping address</p>
+                                        <p class="m-0">
+                                            United States <br />
+                                            3601 Old Capitol Trail, Unit A-7, Suite 170777, Wilmington, DE 19808
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 border-start">
+                                        <p class="mb-0 text-muted">Payment</p>
+                                        <p class="m-0">
+                                            <span class="text-success"> Visa **** 4216 </span> <br />
+                                            Shipping fee: $56 <br />
+                                            Total paid: $456
+                                        </p>
+                                    </div>
+                                </div>
+                                <hr />
+                                <ul class="row list-unstyled">
+                                    <li class="col-xl-4 col-lg-6">
+                                        <div class="d-flex mb-3 mb-xl-0">
+                                            <div class="me-3">
+                                                <img width="72" height="72" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp" class="img-sm rounded border" />
+                                            </div>
+                                            <div class="">
+                                                <p class="mb-0">T-shirts with multiple colors</p>
+                                                <strong> 2x = $25.98 </strong>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-xl-4 col-lg-6">
+                                        <div class="d-flex mb-3 mb-xl-0">
+                                            <div class="me-3">
+                                                <img width="72" height="72" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/7.webp" class="img-sm rounded border" />
+                                            </div>
+                                            <div class="">
+                                                <p class="mb-0">Gaming Headset 32db Black</p>
+                                                <strong> 2x = $339.90 </strong>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-xl-4 col-lg-6">
+                                        <div class="d-flex mb-3 mb-md-0">
+                                            <div class="me-3">
+                                                <img width="72" height="72" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/5.webp" class="img-sm rounded border" />
+                                            </div>
+                                            <div class="">
+                                                <p class="mb-0">Apple Watch Series 4 Space Gray</p>
+                                                <strong> 2x = $339.90 </strong>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card border border-primary shadow-0">
+                            <div class="card-body pb-0">
+                                <header class="d-lg-flex">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">
+                                            Order ID: 9088
+                                            <i class="dot"></i>
+                                            <span class="text-danger"> Pending </span>
+                                        </h6>
+                                        <span class="text-muted">Date: 16 December 2022</span>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="btn btn-sm btn-outline-danger">Cancel order</a>
+                                        <a href="#" class="btn btn-sm btn-primary shadow-0">Track order</a>
+                                    </div>
+                                </header>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="mb-0 text-muted">Contact</p>
+                                        <p class="m-0">
+                                            Mike Johnatan <br />
+                                            Phone: 371-295-9131 <br />
+                                            Email: info@mywebsite.com
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 border-start">
+                                        <p class="mb-0 text-muted">Shipping address</p>
+                                        <p class="m-0">
+                                            United States <br />
+                                            600 Markley Street, Suite 170777 Port Reading, NJ 07064
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 border-start">
+                                        <p class="mb-0 text-muted">Payment</p>
+                                        <p class="m-0">
+                                            <span class="text-success"> Visa **** 4216 </span> <br />
+                                            Shipping fee: $56 <br />
+                                            Total paid: $456
+                                        </p>
+                                    </div>
+                                </div>
+                                <hr />
+                                <ul class="row list-unstyled">
+                                    <li class="col-xl-4 col-lg-6">
+                                        <div class="d-flex mb-3 mb-lg-0">
+                                            <div class="me-3 mb-xl-0">
+                                                <img width="72" height="72" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp" class="img-sm rounded border" />
+                                            </div>
+                                            <div class="info">
+                                                <p class="mb-0">T-shirts with multiple colors</p>
+                                                <strong> 2x = $25.98 </strong>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-xl-4 col-lg-6">
+                                        <div class="d-flex mb-0 mb-md-0">
+                                            <div class="me-3">
+                                                <img width="72" height="72" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/7.webp" class="img-sm rounded border" />
+                                            </div>
+                                            <div class="info">
+                                                <p class="mb-0">Gaming Headset 32db Black</p>
+                                                <strong> 2x = $339.90 </strong>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    </div>
+</section>
+<!-- content -->

@@ -1,0 +1,123 @@
+﻿@page
+@using OnlineShop.Core.Convertors;
+@model OnlineShop.Web.Pages.Admin.Users.IndexModel
+
+@{
+    ViewData["Title"] = "لیست کاربران";
+}
+
+<!-- ======= Page Title ======= -->
+<div class="pagetitle">
+    <h1>مدیریت کاربران</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Admin">پنل مدیریت</a></li>
+            <li class="breadcrumb-item active">مدیریت کاربران</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">لیست کاربران دانشور</h5>
+
+        <div class="col-6 mt-2 mb-3">
+            <a class="btn btn-success" href="/Admin/Users/CreateUser">افزودن کاربر جدید</a>
+        </div>
+
+        <form>
+            <div class="row">
+                <div class="col-sm-12 col-lg-3">
+                    <input name="filterFullName" type="text" class="form-control border border-primary mb-3" placeholder="نام و نام خانوادگی" />
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <input name="filterUserName" type="text" class="form-control border border-primary mb-3" placeholder="نام کاربری" />
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                    <input name="filterEmail" type="text" class="form-control border border-primary mb-3" placeholder="ایمیل" />
+                </div>
+                <div class="col-sm-12 col-lg-1 ms-auto">
+                    <button type="submit" id="submit" class="btn btn-block btn-outline-dark mb-3">جست و جو</button>
+                </div>
+            </div>
+        </form>
+
+
+        <div class="table-responsive">
+            <table id="example" class="table table-hover table-borderless table-striped">
+                <caption>پنل مدیریت دانشور</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th>نام</th>
+                        <th>نام کاربری</th>
+                        <th>ایمیل</th>
+                        <th>وضعیت</th>
+                        <th>تاریخ ثبت نام</th>
+                        <th>دستورات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.UsersViewModel.Users)
+                    {
+                        <tr>
+                            <td>@user.FullName</td>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            @if (user.IsActive)
+                            {
+                                <td class="text-success">فعال</td>
+                            }
+                            else
+                            {
+                                <td class="text-danger">غیرفعال</td>
+                            }
+                            <td class="text-muted">@user.RegisterDate.ToShamsi()</td>
+                            <td class="d-flex justify-content-center">
+                                <a href="#" class="btn btn-sm btn-warning me-2">ویرایش</a>
+                                <a href="#" class="btn btn-sm btn-info me-2">مشاهده</a>
+                                <a href="#" class="btn btn-sm btn-danger">حذف</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (Model.UsersViewModel.PageCount > 1)
+        {
+            <div class="row">
+                <div class="col-6">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link @((Model.UsersViewModel.CurrentPage == 1)? "disabled" : "")" href="/Admin/Users?PageId=@(Model.UsersViewModel.CurrentPage-1)" aria-label="Previous">
+                                    <i class="bi bi-caret-right-fill"></i>
+                                </a>
+                            </li>
+
+                            @for (int i = 1; i <= Model.UsersViewModel.PageCount; i++)
+                            {
+                                <li class="page-item @((i == Model.UsersViewModel.CurrentPage)? "active" : "")">
+                                    <a class="page-link" href="/Admin/Users?PageId=@i">@i</a>
+                                </li>
+                            }
+                            <li class="page-item">
+                                <a class="page-link @((Model.UsersViewModel.CurrentPage == Model.UsersViewModel.PageCount)? "disabled" : "")" href="/Admin/Users?PageId=@(Model.UsersViewModel.CurrentPage+1)" aria-label="Next">
+                                    <i class="bi bi-caret-left-fill"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
+}

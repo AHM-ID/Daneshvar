@@ -1,0 +1,136 @@
+﻿@model OnlineShop.Core.DTOs.Users.EditProfileViewModel
+
+@{
+    ViewData["Title"] = "ویرایش حساب";
+}
+
+<!-- content -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <partial name="_SideBar" />
+            <main class="col-lg-9 col-xl-9">
+                <div class="card p-4 mb-0 shadow-0 border shadow">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="text-decoration-none text-success" href="/">خانه</a></li>
+                            <li class="breadcrumb-item"><a class="text-decoration-none text-success" asp-action="Index" asp-controller="Home" asp-area="UserPanel">پروفایل</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">ویرایش حساب</li>
+                        </ol>
+                    </nav>
+                    <div class="content-body">
+                        <h4>ویرایش حساب کاربری</h4>
+
+                        <hr class="my-4" />
+
+                        <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="Avatar" />
+                            <div class="container-xl px-4 mt-4">
+                                <div class="row">
+                                    <div class="col-xl-4">
+                                        <!-- Profile picture card-->
+                                        <div class="card mb-4 mb-xl-0">
+                                            <div class="card-header">تصویر پروفایل</div>
+                                            <div class="card-body text-center">
+                                                <!-- Profile picture image-->
+                                                <img class="rounded-circle border mb-2 shadow" name="image" id="image" style="height: 150px; width: 150px;" src="/UserAvatar/@Model.Avatar" alt="User Avatar">
+                                                <!-- Profile picture help block-->
+                                                <div class="small font-italic text-muted mb-4">عکس های کوچک تر از 2 مگابایت</div>
+                                                <div class="row align-items-center">
+                                                    <!-- Profile picture upload button-->
+                                                    <label class="small mb-1 control-label" asp-for="UserAvatar"></label>
+                                                    <input class="form-control form-control-sm mb-2" id="file" type="file" asp-for="UserAvatar" onchange="PreviewImage();" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-8">
+                                        <!-- Account details card-->
+                                        <div class="card mb-4">
+                                            <div class="card-header">اطلاعات حساب</div>
+                                            <div class="card-body">
+                                                <!-- Form Group (fullname)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1 control-label" asp-for="FullName"></label>
+                                                    <input class="form-control" asp-for="FullName" type="text">
+                                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                                </div>
+                                                <!-- Form Group (username)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1 control-label" asp-for="UserName"></label>
+                                                    <input class="form-control" asp-for="UserName" type="text">
+                                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                                </div>
+                                                <!-- Form Group (email address)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1 control-label" asp-for="Email"></label>
+                                                    <input class="form-control" asp-for="Email" type="email">
+                                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                                </div>
+                                                <!-- Form Row-->
+                                                <div class="row mb-3">
+                                                    <label asp-for="Gender" class="control-label mb-2"></label>
+                                                    <div class="form-check form-check-inline d-flex justify-content-center">
+                                                        <input asp-for="Gender" value="Male" type="radio" class="btn btn-sm btn-check" name="Gender" id="primary-outlined" autocomplete="off">
+                                                        <label asp-for="Gender" class="btn btn-outline-primary opacity-75 btn-sm rounded-2 col-5 me-3" for="primary-outlined">مرد <i class="bi bi-gender-male icon-larger-2 me-1 align-self-end"></i></label>
+
+                                                        <input asp-for="Gender" value="Female" type="radio" class="btn btn-sm btn-check" name="Gender" id="danger-outlined" autocomplete="off">
+                                                        <label asp-for="Gender" class="btn btn-outline-danger opacity-75 btn-sm rounded-2 col-5" for="danger-outlined">زن <i class="bi bi-gender-female icon-larger-2 me-1 align-self-end"></i></label>
+                                                    </div>
+                                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                                </div>
+                                                <!-- Save changes button-->
+                                                <button class="btn btn-info" type="submit"><i class="bi bi-save me-2"></i>ذخیره تغییرات</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    </div>
+</section>
+<!-- content -->
+@section Scripts {
+
+    <script type='text/javascript'>
+
+        $(document).ready(function () {
+            $("input:radio[name=Gender]").click(function () {
+                var value = $(this).val();
+                var image_name;
+                var defaultPic = document.getElementById("image").src;
+                if (defaultPic.includes("/UserAvatar/Male.png", 0) || defaultPic.includes("/UserAvatar/Female.png", 0)) {
+                    if ($('#file')[0].files.length === 0) {
+                        if (value == 'Male') {
+                            image_name = "/UserAvatar/Male.png";
+                        } else {
+                            image_name = "/UserAvatar/Female.png";
+                        }
+
+                        $('#image').attr('src', image_name);
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+
+        function PreviewImage() {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("file").files[0]);
+
+            oFReader.onload = function (oFREvent) {
+                document.getElementById("image").src = oFREvent.target.result;
+            };
+        };
+
+    </script>
+
+}

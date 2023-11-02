@@ -1,0 +1,136 @@
+﻿@page
+@model OnlineShop.Web.Pages.Admin.Users.CreateUserModel
+@{
+    ViewData["Title"] = "افزودن کاربر";
+}
+
+<!-- ======= Page Title ======= -->
+<div class="pagetitle">
+    <h1>مدیریت کاربران</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Admin">پنل مدیریت</a></li>
+            <li class="breadcrumb-item"><a href="/Admin/Users">مدیریت کاربران</a></li>
+            <li class="breadcrumb-item active">افزودن کاربر</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">مشخصات کاربر</h4>
+
+        <main class="col-12">
+            <div class="px-4 mb-0">
+                <hr class="my-4" />
+                <div class="content-body">
+                    <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                        <div class="container-xl px-3 mt-2">
+                            <div class="row">
+                                <div class="col-xl-4">
+                                    <!-- Profile picture card-->
+                                    <div class="card mb-2 mb-xl-0">
+                                        <div class="card-header">تصویر پروفایل</div>
+                                        <div class="card-body text-center mt-3">
+                                            <!-- Profile picture image-->
+                                            <img class="rounded-circle border mb-2 shadow" name="image" id="image" style="height: 150px; width: 150px;" src="/UserAvatar/Male.png" alt="User Avatar">
+                                            <!-- Profile picture help block-->
+                                            <div class="small font-italic text-muted mb-4">عکس های کوچک تر از 2 مگابایت</div>
+                                            <div class="row align-items-center">
+                                                <!-- Profile picture upload button-->
+                                                <label class="small mb-1 control-label" asp-for="createUser.UserAvatar"></label>
+                                                <input class="form-control form-control-sm mb-2" id="file" type="file" asp-for="createUser.UserAvatar" onchange="PreviewImage();"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-8">
+                                    <!-- Account details card-->
+                                    <div class="card mb-2">
+                                        <div class="card-header">اطلاعات حساب</div>
+                                        <div class="card-body">
+                                            <!-- Form Group (fullname)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1 control-label" asp-for="createUser.FullName"></label>
+                                                <input class="form-control" asp-for="createUser.FullName" type="text">
+                                                <span asp-validation-for="createUser.FullName" class="text-danger"></span>
+                                            </div>
+                                            <!-- Form Group (username)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1 control-label" asp-for="createUser.UserName"></label>
+                                                <input class="form-control" asp-for="createUser.UserName" type="text">
+                                                <span asp-validation-for="createUser.UserName" class="text-danger"></span>
+                                            </div>
+                                            <!-- Form Group (email address)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1 control-label" asp-for="createUser.Email"></label>
+                                                <input class="form-control" asp-for="createUser.Email" type="email">
+                                                <span asp-validation-for="createUser.Email" class="text-danger"></span>
+                                            </div>
+                                            <!-- Form Group (password)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1 control-label" asp-for="createUser.Password"></label>
+                                                <input class="form-control" asp-for="createUser.Password" type="text">
+                                                <span asp-validation-for="createUser.Password" class="text-danger"></span>
+                                            </div>
+                                            <!-- Form Row-->
+                                            <div class="row mb-3">
+                                                <label asp-for="createUser.Gender" class="control-label mb-2"></label>
+                                                <div class="form-check form-check-inline d-flex justify-content-center">
+                                                    <input asp-for="createUser.Gender" value="Male" type="radio" class="btn btn-sm btn-check" name="Gender" id="primary-outlined" autocomplete="off">
+                                                    <label asp-for="createUser.Gender" class="btn btn-outline-primary opacity-75 btn-sm rounded-2 col-4 me-3" for="primary-outlined">مرد <i class="bi bi-gender-male icon-larger-2 me-1 align-self-end"></i></label>
+
+                                                    <input asp-for="createUser.Gender" value="Female" type="radio" class="btn btn-sm btn-check" name="Gender" id="danger-outlined" autocomplete="off">
+                                                    <label asp-for="createUser.Gender" class="btn btn-outline-danger opacity-75 btn-sm rounded-2 col-4" for="danger-outlined">زن <i class="bi bi-gender-female icon-larger-2 me-1 align-self-end"></i></label>
+                                                </div>
+                                                <span asp-validation-for="createUser.Gender" class="text-danger"></span>
+                                            </div>
+                                            <!-- Save changes button-->
+                                            <button class="btn btn-success" type="submit"><i class="bi bi-save me-2"></i>افزودن کاربر</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("input:radio[name=Gender]").click(function () {
+                var value = $(this).val();
+                var image_name;
+                if ($('#file')[0].files.length === 0) {
+                    if (value == 'Male') {
+                        image_name = "/UserAvatar/Male.png";
+                    } else {
+                        image_name = "/UserAvatar/Female.png";
+                    }
+
+                    $('#image').attr('src', image_name);
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        function PreviewImage() {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("file").files[0]);
+
+            oFReader.onload = function (oFREvent) {
+                document.getElementById("image").src = oFREvent.target.result;
+            };
+        };
+
+    </script>
+
+}

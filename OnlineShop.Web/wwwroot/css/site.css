@@ -1,0 +1,51 @@
+/*
+=================
+      Fonts
+=================
+*/
+@font-face {
+    font-family: "vazirmatn";
+    src: url("../fonts/vazirmatn/Farsi-Digits-Non-Latin/Vazirmatn-FD-NL-Medium.woff2") format("woff2"), url("../fonts/vazirmatn/Farsi-Digits-Non-Latin/Vazirmatn-FD-NL-Medium.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Mooli";
+    src: url("../fonts/Mooli/Mooli-Regular.woff") format("woff"), url("../fonts/Mooli/Mooli-Regular.woff2") format("woff2"), url("../fonts/Mooli/Mooli-Regular.ttf") format("truetype");
+}
+
+/*
+=================
+    Variables
+=================
+*/
+:root {
+    --ff-primary: "Mooli", "vazirmatn", sans-serif;
+}
+
+/*
+=================
+    Defaults
+=================
+*/
+* {
+    font-family: var(--ff-primary);
+    font-size: 1rem;
+}
+
+.flex-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.header {
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/images/Local/Header.jpg') center/cover no-repeat fixed;
+}
+
+.icon-larger-1 {
+    font-size: 1.4rem;
+}
+
+.icon-larger-2 {
+    font-size: 1.25rem;
+}

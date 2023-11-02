@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Mooli';
+    src: url('Mooli-Regular.eot');
+    src: local('Mooli Regular'), local('Mooli-Regular'),
+        url('Mooli-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Mooli-Regular.woff2') format('woff2'),
+        url('Mooli-Regular.woff') format('woff'),
+        url('Mooli-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

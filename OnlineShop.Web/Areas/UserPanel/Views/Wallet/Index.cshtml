@@ -1,0 +1,116 @@
+﻿@using System.Security.Claims;
+@using OnlineShop.Core.Convertors;
+@using OnlineShop.Core.DTOs.Users;
+@model OnlineShop.Core.DTOs.Users.WalletChargeViewModel
+
+@{
+    ViewData["Title"] = "کیف پول " + User.FindFirstValue("FullName");
+}
+
+<!-- content -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <partial name="_SideBar" />
+            <main class="col-lg-9 col-xl-9">
+                <div class="card p-4 mb-0 shadow-0 border shadow">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="text-decoration-none text-success" href="/">خانه</a></li>
+                            <li class="breadcrumb-item"><a class="text-decoration-none text-success" asp-action="Index" asp-controller="Home" asp-area="UserPanel">پروفایل</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">کیف پول</li>
+                        </ol>
+                    </nav>
+                    <div class="content-body">
+                        <h4>کیف پول</h4>
+
+                        <hr class="my-4" />
+
+                        <form asp-action="Index" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="container-xl px-4 mt-4">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-xl-8 order-2 order-lg-1">
+                                        <!-- Account details card-->
+                                        <div class="card mb-4">
+                                            <div class="card-header">اطلاعات حساب</div>
+                                            <div class="card-body">
+                                                <!-- Form Group (Money Charge)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1 control-label" asp-for="Amount"></label>
+                                                    <input class="form-control" asp-for="Amount" type="number" placeholder="مبلغ دلخواه را به تومان وارد کنید">
+                                                    <span asp-validation-for="Amount" class="text-danger"></span>
+                                                </div>
+                                                <!-- Save changes button-->
+                                                <button class="btn btn-warning" type="submit"><i class="bi bi-cash me-2"></i>شارژ کیف پول</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 order-1 order-lg-2">
+                                        <div class="d-flex mb-2">
+                                            <img src="~/images/Local/Wallet.jpg" class="img-fluid" alt="Change Password image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <hr class="my-4" />
+
+                        @{
+                            List<WalletViewModel> list = ViewData["WalletItemsList"] as List<WalletViewModel>;
+                        }
+
+                        @if(list.Any())
+                        {
+                            <h4>سوابق تراکنش ها</h4>
+
+                            <div class="table-responsive">
+                                <table class="table table-borderless table-striped table-hover table-responsive">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>مبلغ</th>
+                                            <th>شرح</th>
+                                            <th>نوع تراکنش</th>
+                                            <th>تاریخ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in list.OrderByDescending(l => l.PayDate))
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.Amount.ToString("#,0 تومان")
+                                                </td>
+                                                <td class="text-secondary">
+                                                    @item.Description
+                                                </td>
+                                                <td>
+                                                    @if (item.TypeID == 1)
+                                                    {
+                                                        <p class="text-success">واریز به حساب</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-danger">برداشت از حساب</p>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @item.PayDate.ToShamsi()
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    </div>
+</section>
+<!-- content -->

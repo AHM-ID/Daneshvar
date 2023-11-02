@@ -1,0 +1,51 @@
+﻿
+
+@{
+    ViewData["Title"] = "نتیجه پرداخت آنلاین";
+}
+
+<section class="w-100 border-dark mt-2">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black rounded">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-12">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a class="text-decoration-none text-success" asp-action="Index" asp-controller="Home">خانه</a></li>
+                                        <li class="breadcrumb-item"><a class="text-decoration-none text-success" asp-action="Index" asp-controller="Home" asp-area="UserPanel">پروفایل</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">نتیجه پرداخت</li>
+                                    </ol>
+                                </nav>
+                                @if(ViewBag.Success != null)
+                                {
+                                    <h1 class="text-center text-success fw-bold mb-3 mx-1 mx-md-4 mt-3">پرداخت آنلاین</h1>
+
+                                    <div class="alert alert-success" role="alert">
+                                        <h4 class="alert-heading"><i class="bi bi-check2-circle icon-larger-1 me-2"></i>پرداخت با موفقیت انجام شد.</h4>
+                                        <p>کد رهگیری تراکنش : @ViewBag.TrackCode</p>
+                                        <hr>
+                                        <p class="mb-0">با تشکر تیم دانشور</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <h1 class="text-center text-danger fw-bold mb-3 mx-1 mx-md-4 mt-3">پرداخت آنلاین</h1>
+
+                                    <div class="alert alert-danger" role="alert">
+                                        <h4 class="alert-heading"><i class="bi bi-exclamation-circle icon-larger-1 me-2"></i>تراکنش ناموفق !!</h4>
+                                        <p>عملیات پرداخت با مشکلی مواجه شد لطفا پس از بررسی مجددا سعی کنید.</p>
+                                        <hr>
+                                        <p class="mb-0">با تشکر تیم دانشور</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

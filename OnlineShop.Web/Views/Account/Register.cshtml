@@ -1,0 +1,172 @@
+﻿@model OnlineShop.Core.DTOs.Users.RegisterViewModel
+
+@{
+    ViewData["Title"] = "عضویت";
+}
+
+<section class="w-100 h-100 border-dark mt-2">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black rounded">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a class="text-decoration-none text-success" asp-action="Index" asp-controller="Home">خانه</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">عضویت</li>
+                                    </ol>
+                                </nav>
+                                <h1 class="text-center text-secondary fw-bold mb-3 mx-1 mx-md-4 mt-3">عضویت در سایت</h1>
+                                <form asp-action="Register" asp-controller="Account" method="post" class="mx-1 mx-md-4">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                    <div class="d-flex flex-row align-items-center mb-3">
+                                        <i class="bi bi-person-vcard icon-larger-1 me-3 align-self-end"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="FullName" class="control-label"></label>
+                                            <input asp-for="FullName" type="text" class="form-control" />
+                                            <span asp-validation-for="FullName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex flex-row align-items-center mb-3">
+                                        <i class="bi bi-file-person icon-larger-1 me-3 align-self-end"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="UserName" class="control-label"></label>
+                                            <input asp-for="UserName" type="text" class="form-control" />
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex flex-row align-items-center mb-3">
+                                        <i class="bi bi-envelope icon-larger-1 me-3 align-self-end"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <input asp-for="Email" type="email" class="form-control"/>
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex flex-row align-items-center mb-1">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Gender" class="control-label ms-5"></label>
+                                            <div class="form-check form-check-inline">
+                                                <input asp-for="Gender" value="Male" type="radio" class="btn btn-check" name="Gender" id="primary-outlined" autocomplete="off">
+                                                <label class="btn btn-outline-primary opacity-75 btn-sm rounded-2" for="primary-outlined">مرد <i class="bi bi-gender-male icon-larger-2 me-1 align-self-end"></i></label>
+
+                                                <input asp-for="Gender" value="Female" type="radio" class="btn btn-check" name="Gender" id="danger-outlined" autocomplete="off">
+                                                <label class="btn btn-outline-danger opacity-75 btn-sm rounded-2" for="danger-outlined">زن <i class="bi bi-gender-female icon-larger-2 me-1 align-self-end"></i></label>
+                                            </div>
+                                            <span asp-validation-for="Gender" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-3">
+                                        <i class="bi bi-shield-lock icon-larger-1 me-3 align-self-end"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="Password" class="control-label"></label>
+                                            <input asp-for="Password" type="password" class="form-control" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex flex-row align-items-center mb-3">
+                                        <i class="bi bi-shield-lock icon-larger-1 me-3 align-self-end"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label asp-for="RePassword" class="control-label"></label>
+                                            <input asp-for="RePassword" type="password" class="form-control" />
+                                            <span asp-validation-for="RePassword" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group form-check d-flex justify-content-start">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="UserAgreement" />
+                                        </div>
+                                        <div>
+                                            <label class="form-check-label" for="formExample">قوانین و مقررات دانشور را میپذیرم.</label>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="form-group d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <input type="submit" id="Submit" value="عضویت" class="btn btn-success btn-lg" />
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="form-group d-flex justify-content-center mx-4">
+                                        <a class="btn btn-outline-primary me-2"
+                                           asp-action="Login" asp-controller="Account">
+                                            <i class="bi bi-person-check icon-larger-2 me-2"></i> ورود به سایت
+                                        </a>
+
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#Modal">
+                                            <i class="bi bi-info-circle icon-larger-2 me-2"></i> قوانین و مقررات
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="ModalLabel">قوانین و مقررات دانشور</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-muted">
+                                                        <h4 class="text-success">محتوای آموزشی</h4>
+                                                        <ul>
+                                                            <li>تمامی دوره‌های آموزشی تنها برای استفاده شخصی کاربران می‌باشد و انتقال یا توزیع آن به صورت عمومی ممنوع است.</li>
+                                                            <li>کاربران می‌بایست از محتوای دوره‌های آموزشی فقط به منظور یادگیری شخصی استفاده کنند و هرگونه استفاده تجاری از آن ممنوع است.</li>
+                                                            <li>کپی برداری، توزیع یا فروش محتوای دوره‌های آموزشی بدون موافقت کتبی از صاحبان حقوق محتوا غیرقانونی است و قابل پیگرد قانونی است.</li>
+                                                        </ul>
+
+                                                        <h4 class="text-success">حقوق تکثیر</h4>
+                                                        <p>تمامی حقوق تکثیر برای گروه دانشور محفوظ است.</p>
+
+                                                        <h4 class="text-success">تغییرات در قوانین و مقررات</h4>
+                                                        <p>گروه دانشور حق دارد قوانین و مقررات را در هر زمان تغییر دهد. تغییرات اعمال شده در قوانین و مقررات به محض انتشار روی وبسایت اعمال می‌شوند.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex order-1 order-lg-2">
+                                <img src="~/images/Local/Register.png" class="img-fluid" alt="Register image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $('#Submit').prop("disabled", true);
+        $('#UserAgreement:checkbox').click(function () {
+            if ($(this).is(':checked')) {
+                $('#Submit').prop("disabled", false);
+            } else {
+                if ($('#UserAgreement').filter(':checked').length < 1) {
+                    $('#Submit').attr('disabled', true);
+                }
+            }
+        });
+    </script>
+}
