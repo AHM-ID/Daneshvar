@@ -29,6 +29,7 @@
 * {
     font-family: var(--ff-primary);
     font-size: 1rem;
+    caret-color: transparent;
 }
 
 .flex-wrapper {

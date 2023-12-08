@@ -24,7 +24,7 @@
             <div class="px-4 mb-0">
                 <hr class="my-4" />
                 <div class="content-body">
-                    <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                    <form asp-action="CreateUser" method="post" enctype="multipart/form-data">
                         <div class="container-xl px-3 mt-2">
                             <div class="row">
                                 <div class="col-xl-4">
@@ -105,10 +105,10 @@
     <script type='text/javascript'>
         $(document).ready(function () {
             $("input:radio[name=Gender]").click(function () {
-                var value = $(this).val();
-                var image_name;
+                let value = $(this).val();
+                let image_name;
                 if ($('#file')[0].files.length === 0) {
-                    if (value == 'Male') {
+                    if (value === 'Male') {
                         image_name = "/UserAvatar/Male.png";
                     } else {
                         image_name = "/UserAvatar/Female.png";
@@ -123,13 +123,13 @@
     <script type="text/javascript">
 
         function PreviewImage() {
-            var oFReader = new FileReader();
+            let oFReader = new FileReader();
             oFReader.readAsDataURL(document.getElementById("file").files[0]);
 
             oFReader.onload = function (oFREvent) {
                 document.getElementById("image").src = oFREvent.target.result;
             };
-        };
+        }
 
     </script>
 

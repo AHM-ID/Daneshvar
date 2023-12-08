@@ -11,5 +11,10 @@ namespace OnlineShop.Web.Pages.Admin.Users
         public void OnGet()
         {
         }
+        
+        [HttpPost]
+        public void OnPost()
+        {
+        }
     }
 }

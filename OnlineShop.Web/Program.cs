@@ -9,7 +9,7 @@ using OnlineShop.DataLayer.Context;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddMvc();
 
 #region Authentication 
