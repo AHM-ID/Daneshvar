@@ -12,7 +12,6 @@ namespace OnlineShop.Web.Pages.Admin.Users
         {
         }
         
-        [HttpPost]
         public void OnPost()
         {
         }

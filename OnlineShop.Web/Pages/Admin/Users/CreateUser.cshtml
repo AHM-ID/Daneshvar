@@ -9,8 +9,8 @@
     <h1>مدیریت کاربران</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/Admin">پنل مدیریت</a></li>
-            <li class="breadcrumb-item"><a href="/Admin/Users">مدیریت کاربران</a></li>
+            <li class="breadcrumb-item"><a asp-route="/Admin">پنل مدیریت</a></li>
+            <li class="breadcrumb-item"><a asp-route="/Admin/Users">مدیریت کاربران</a></li>
             <li class="breadcrumb-item active">افزودن کاربر</li>
         </ol>
     </nav>
@@ -24,7 +24,7 @@
             <div class="px-4 mb-0">
                 <hr class="my-4" />
                 <div class="content-body">
-                    <form asp-action="CreateUser" method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data">
                         <div class="container-xl px-3 mt-2">
                             <div class="row">
                                 <div class="col-xl-4">
@@ -33,7 +33,7 @@
                                         <div class="card-header">تصویر پروفایل</div>
                                         <div class="card-body text-center mt-3">
                                             <!-- Profile picture image-->
-                                            <img class="rounded-circle border mb-2 shadow" name="image" id="image" style="height: 150px; width: 150px;" src="/UserAvatar/Male.png" alt="User Avatar">
+                                            <img class="rounded-circle border mb-2 shadow" id="image" style="height: 150px; width: 150px;" src="/UserAvatar/Male.png" alt="User Avatar">
                                             <!-- Profile picture help block-->
                                             <div class="small font-italic text-muted mb-4">عکس های کوچک تر از 2 مگابایت</div>
                                             <div class="row align-items-center">
